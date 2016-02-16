@@ -18,7 +18,7 @@ module Voltos
   end
   
   def self.load
-    env_str = Curl.get("http://voltos.online/v1/credentials") do |http|
+    env_str = Curl.get("https://voltos.online/v1/credentials") do |http|
       http.headers["Authorization"] = "Token token=#{Voltos.configuration.api_key}"
     end
     Voltos.configuration.envs = JSON.parse(env_str.body_str)
