@@ -1,5 +1,8 @@
 require "voltos/version"
 
+require "curb"
+require "json"
+
 module Voltos
   class << self
     attr_accessor :configuration
