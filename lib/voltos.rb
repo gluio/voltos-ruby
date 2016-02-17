@@ -28,8 +28,12 @@ module Voltos
     Voltos.configuration.envs.keys
   end
   
-  def self.key(env_key)
-    Voltos.configuration.envs[env_key]
+  def self.key(bundle, env_key)
+    if not bundle == ""
+      Voltos.configuration.envs["bundles"][bundle][env_key]
+    else
+      Voltos.configuration.envs["unbundled"][env_key]
+    end
   end
   
   class Configuration
