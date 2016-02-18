@@ -32,6 +32,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "curb", '~> 0'
   spec.add_development_dependency "json", '~> 1.8.3'
   
-  spec.add_runtime_dependency "curb", '~> 0'
-  spec.add_runtime_dependency "json", '~> 1.8.3'
+  spec.add_runtime_dependency "curb", [">= 0"]
+  spec.add_runtime_dependency "json", [">= 0"]
 end
