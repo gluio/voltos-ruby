@@ -13,10 +13,6 @@ module Voltos
     yield(configuration)
   end
   
-  def self.foobar
-    puts "API key is: #{Voltos.configuration.api_key}"
-  end
-  
   def self.load
     json_str = Curl.get("https://voltos.online/v1/credentials") do |http|
       http.headers["Authorization"] = "Token token=#{Voltos.configuration.api_key}"
@@ -26,8 +22,8 @@ module Voltos
     Voltos.configuration.message = Voltos.configuration.json_creds["message"]
   end
   
-  def self.keys
-    Voltos.configuration.json_creds.keys
+  def self.bundles
+    Voltos.configuration.json_creds["data"]["bundles"].keys
   end
   
   def self.key(bundle_name, env_key)
@@ -36,6 +32,14 @@ module Voltos
     else
       Voltos.configuration.json_creds["data"]["unbundled"][env_key]
     end
+  end
+  
+  def self.status
+    return Voltos.configuration.status
+  end
+  
+  def self.message
+    return Voltos.configuration.message
   end
   
   class Configuration
