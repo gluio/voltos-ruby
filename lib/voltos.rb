@@ -63,6 +63,7 @@ module Voltos
   end
 end
 
+Volotos.configure
 if ENV["VOLTOS_API_KEY"]
   Voltos.load
 end
