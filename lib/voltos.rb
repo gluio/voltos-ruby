@@ -58,7 +58,11 @@ module Voltos
 
     def initialize
       @api_url = ENV["VOLTOS_API_URL"] || "https://voltos.online/v1"
-      @api_key = ""
+      @api_key = ENV["VOLTOS_API_KEY"]
     end
   end
+end
+
+if ENV["VOLTOS_API_KEY"]
+  Voltos.load
 end

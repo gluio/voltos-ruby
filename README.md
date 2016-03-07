@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Getting started
 
-1. Find your unique Voltos API key. See "Account" settings.
+1. Find your unique Voltos API key. See "Bundle" settings.
 
 2. Set this key as an environment variable, e.g.
    ```ruby
@@ -34,9 +34,6 @@ Or install it yourself as:
 3. Require the `voltos` gem early on, prior to where your trying to use any credentials
    ```ruby
    require 'voltos'
-    # load all of the credentials for that API key
-    Voltos.load
-
     # access the credential "MAILER_API_TOKEN" that's in the bundle
     puts ENV["MAILER_API_TOKEN"]
     ```
