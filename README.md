@@ -25,48 +25,20 @@ Or install it yourself as:
 2. Set this key as an environment variable, e.g.
    ```ruby
    $ export VOLTOS_KEY=13579def13579def
-   
+
    # or on a platform like Heroku
-   $ heroku config:set VOLTOS_KEY=13579def13579def   
+   $ heroku config:set VOLTOS_KEY=13579def13579def
    ```
    We'll use this key to load up our Voltos credentials (don't worry, you'll only need to set one key this way).
-   
-3. Load up the Voltos credentials. You'll probably want them early on, prior to where your trying to use them (e.g. in ``environment.rb`` in Rails).
-   ```ruby
-    Voltos.configure do |config|
-      config.api_key = ENV["VOLTOS_KEY"]
-    end
 
-    # load all the bundles of credentials for that API key
+3. Require the `voltos` gem early on, prior to where your trying to use any credentials
+   ```ruby
+   require 'voltos'
+    # load all of the credentials for that API key
     Voltos.load
 
-    # access the credential "MAILER_API_TOKEN" that's in the "myapp-prod" bundle
-    ENV["MAILER_API_TOKEN"] = Voltos.key("myapp-prod", "MAILER_API_TOKEN")
-    ```
-    Note that we're grabbing the credential and stashing it in an environment variable (``MAILER_API_TOKEN``). This fits pretty well with existing idiom, plus ensures that existing code using environment variables keeps working with no change.
-
-4. You can load different credentials for different environments. For example: let's say you've bundled your credentials into ``myapp-dev`` and ``myapp-prod`` bundles (for development and production environments, respectively). 
-
-    In ``config/environments/development.rb``:
-
-   ```ruby
-    Voltos.configure do |config|
-      config.api_key = ENV["VOLTOS_KEY"]
-    end
-
-    Voltos.load
-    ENV["ANALYTICS_KEY"] = Voltos.key("myapp-dev", "ANALYTICS_KEY")
-    ```
-
-    Then in ``config/environments/production.rb``:
-
-   ```ruby
-    Voltos.configure do |config|
-      config.api_key = ENV["VOLTOS_KEY"]
-    end
-
-    Voltos.load
-    ENV["ANALYTICS_KEY"] = Voltos.key("myapp-prod", "ANALYTICS_KEY")
+    # access the credential "MAILER_API_TOKEN" that's in the bundle
+    puts ENV["MAILER_API_TOKEN"]
     ```
 
 ## Contributing
