@@ -10,7 +10,7 @@ module Voltos
 
   def self.configure
     self.configuration ||= Configuration.new
-    yield(configuration)
+    yield(configuration) if block_given?
   end
 
   def self.load
@@ -63,7 +63,7 @@ module Voltos
   end
 end
 
-Volotos.configure
+Voltos.configure
 if ENV["VOLTOS_API_KEY"]
   Voltos.load
 end
