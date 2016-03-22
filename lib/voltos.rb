@@ -63,6 +63,14 @@ module Voltos
   end
 end
 
+begin
+  if Rails
+    require 'voltos/rails'
+  end
+rescue NameError
+  # Rails not loaded
+end
+
 Voltos.configure
 if ENV["VOLTOS_API_KEY"]
   Voltos.load
