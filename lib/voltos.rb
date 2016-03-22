@@ -58,7 +58,7 @@ module Voltos
 
     def initialize
       @api_url = ENV["VOLTOS_API_URL"] || "https://voltos.online/v1"
-      @api_key = ENV["VOLTOS_API_KEY"]
+      @api_key = ENV["VOLTOS_KEY"]
     end
   end
 end
@@ -72,6 +72,6 @@ rescue NameError
 end
 
 Voltos.configure
-if ENV["VOLTOS_API_KEY"]
+if ENV["VOLTOS_KEY"]
   Voltos.load
 end
