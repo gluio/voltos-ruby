@@ -1,4 +1,5 @@
 require 'open-uri'
+require 'fileutils'
 require 'rbconfig'
 require 'rubygems/package'
 require 'zip'
@@ -15,7 +16,9 @@ def download_binary(platform)
         zip_file.each do  |f|
           if f.file?
             name = f.name == 'voltos' ? 'voltos-cli' : f.name
-            f.extract(File.join(local_bin_path, name))
+            local_file_name = File.join(local_bin_path, name)
+            f.extract(local_file_name)
+            FileUtils.chmod 0711, local_file_name
           end
         end
       end
@@ -30,6 +33,7 @@ def download_binary(platform)
           open(local_file_name, 'w') do |local_file|
             local_file.write(entry.read)
           end
+          FileUtils.chmod 0711, local_file_name
         end
       end
       tar_extract.close
