@@ -30,5 +30,5 @@ Gem.execute do |original_file|
     outThread.join
     process = thread.value
   end
-  exit(process.exitstatus)
+  exit(process.exitstatus) if process
 end
