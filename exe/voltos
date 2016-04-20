@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'open3'
 require 'readline'
-bin = Gem.bin_path('voltos', 'voltos-cli', version)
+bin = Gem.bin_path('voltos', 'voltos-cli')
 process = nil
 Open3.popen3(bin, *ARGV) do |stdin, stdout, stderr, thread|
   Thread.new do
