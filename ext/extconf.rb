@@ -26,9 +26,9 @@ def download_binary(platform)
     end
   end
 end
+
 def download_binary(platform)
   local_bin_path = File.expand_path("../exe")
-  platform = :linux64
   latest_binary = "https://voltos.online/v1/download/#{platform}"
   open(latest_binary) do |remote_file|
     case platform
