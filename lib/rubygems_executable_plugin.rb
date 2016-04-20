@@ -5,6 +5,7 @@ Gem.execute do |original_file|
   gem 'voltos', version
   bin = Gem.bin_path('voltos', 'voltos', version)
   process = nil
+  has_output = false
   Open3.popen3(bin, *ARGV) do |stdin, stdout, stderr, thread|
     Thread.new do
       while !stdin.closed? do
@@ -21,6 +22,7 @@ Gem.execute do |original_file|
 
     outThread = Thread.new do
       while !stdout.eof?  do
+        has_output = true
         putc stdout.readchar
       end
     end
@@ -30,5 +32,5 @@ Gem.execute do |original_file|
     outThread.join
     process = thread.value
   end
-  exit(process.exitstatus) if process
+  exit(process.exitstatus) if has_output && !process.nil?
 end
