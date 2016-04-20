@@ -3,19 +3,6 @@ require 'rbconfig'
 require 'rubygems/package'
 require 'zip'
 require 'zlib'
-# Cross-platform way of finding an executable in the $PATH.
-#
-#   which('ruby') #=> /usr/bin/ruby
-def which(cmd)
-  exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
-  ENV['PATH'].split(File::PATH_SEPARATOR).each do |path|
-    exts.each { |ext|
-      exe = File.join(path, "#{cmd}#{ext}")
-      return exe if File.executable?(exe) && !File.directory?(exe)
-    }
-  end
-  return nil
-end
 
 def download_binary(platform)
   local_bin_path = File.expand_path("../exe")
@@ -68,19 +55,13 @@ module OS
   end
 end
 
-if which('voltos')
-  puts "Voltos binary already installed on system, skipping re-compilation."
-  exit(0)
+print "Preparing Voltos binary..."
+case OS.platform
+when :osx
+  download_binary(:osx)
+when :linux, :unix
+  download_binary(:linux64)
 else
-  print "Preparing Voltos binary..."
-  case OS.platform
-  when :osx
-    download_binary(:osx)
-  when :linux, :unix
-    download_binary(:linux64)
-  else
-    puts " #{OS.platform} does not current have binary support for Voltos. Skipping."
-  end
-  exit(0)
+  puts " #{OS.platform} does not current have binary support for Voltos. Skipping."
 end
-
+exit(0)
