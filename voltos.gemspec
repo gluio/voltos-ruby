@@ -41,6 +41,7 @@ Gem::Specification.new do |spec|
   # spec.add_development_dependency "json"
 
   spec.add_runtime_dependency "curb", [">= 0"]
+  spec.add_runtime_dependency "rubyzip", [">= 0"]
   # spec.add_runtime_dependency "json", [">= 0"]
   # add_runtime_dependency 'curb', '>= 0', '~> 0'
 end
