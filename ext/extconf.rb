@@ -18,16 +18,6 @@ def which(cmd)
 end
 
 def download_binary(platform)
-  local_bin_path = File.expand_path("../exe/voltos")
-  open(local_bin_path, 'w') do |local_file|
-    latest_binary = "https://voltos.online/v1/download/#{platform}"
-    open(latest_binary) do |remote_file|
-      local_file.write(Zlib::GzipReader.new(remote_file).read)
-    end
-  end
-end
-
-def download_binary(platform)
   local_bin_path = File.expand_path("../exe")
   latest_binary = "https://voltos.online/v1/download/#{platform}"
   open(latest_binary) do |remote_file|
@@ -37,7 +27,8 @@ def download_binary(platform)
       Zip::File.open(remote_file) do |zip_file|
         zip_file.each do  |f|
           if f.file?
-            f.extract(File.join(local_bin_path, f.name))
+            name = f.name ? 'voltos' : 'voltos-cli' : f.name
+            f.extract(File.join(local_bin_path, name))
           end
         end
       end
@@ -47,7 +38,8 @@ def download_binary(platform)
       tar_extract.rewind
       tar_extract.each do |entry|
         if entry.file?
-          local_file_name = File.join(local_bin_path, entry.full_name)
+          name = entry.full_name ? 'voltos' : 'voltos-cli' : entry.full_name
+          local_file_name = File.join(local_bin_path, name)
           open(local_file_name, 'w') do |local_file|
             local_file.write(entry.read)
           end
