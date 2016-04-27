@@ -23,9 +23,13 @@ Open3.popen3(bin, *ARGV) do |stdin, stdout, stderr, thread|
     end
   end
 
-  Process::waitpid(thread.pid) rescue nil
-  errThread.join
-  outThread.join
-  process = thread.value
+  begin
+    Process::waitpid(thread.pid) rescue nil
+    errThread.join
+    outThread.join
+    process = thread.value
+  rescue SystemExit, Interrupt
+    retry
+  end
 end
 exit(process.exitstatus) if !process.nil?
