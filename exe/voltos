@@ -32,4 +32,4 @@ Open3.popen3(bin, *ARGV) do |stdin, stdout, stderr, thread|
     retry
   end
 end
-exit(process.exitstatus) if !process.nil?
+exit(process.exitstatus.to_i) if !process.nil?
