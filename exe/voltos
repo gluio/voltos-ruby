@@ -1,35 +1,20 @@
 #!/usr/bin/env ruby
-require 'open3'
+require 'pty'
 require 'readline'
 bin = "#{Gem.bin_path('voltos', 'voltos')}-cli"
-process = nil
-Open3.popen3(bin, *ARGV) do |stdin, stdout, stderr, thread|
+status = PTY.spawn(bin, *ARGV) do |stdout, stdin, pid|
   Thread.new do
-    while !stdin.closed? do
-      input = Readline.readline("", true).strip
-      stdin.puts input
-    end
+    loop { STDOUT.print stdout.getc }
   end
-
-  errThread = Thread.new do
-    while !stderr.eof?  do
-      putc stderr.readchar
-    end
+  Thread.new do
+    input = Readline.readline("", true).strip
+    stdin.puts input
   end
-
-  outThread = Thread.new do
-    while !stdout.eof?  do
-      putc stdout.readchar
-    end
-  end
-
   begin
-    Process::waitpid(thread.pid) rescue nil
-    errThread.join
-    outThread.join
-    process = thread.value
+    Process::waitpid(pid) rescue nil
   rescue SystemExit, Interrupt
+    Process.kill('INT', pid)
     retry
   end
 end
-exit(process.exitstatus.to_i) if !process.nil?
+exit(status.to_i)
