@@ -8,8 +8,12 @@ status = PTY.spawn(bin, *ARGV) do |stdout, stdin, pid|
   end
   Thread.new do
     loop do
-      input = Readline.readline("", true).strip
-      stdin.puts input
+      input = Readline.readline("", true)
+      if input.nil?
+        stdout.close
+        stdin.close
+      end
+      stdin.puts input.strip
     end
   end
   begin
@@ -17,6 +21,8 @@ status = PTY.spawn(bin, *ARGV) do |stdout, stdin, pid|
   rescue SystemExit, Interrupt
     Process.kill('INT', pid)
     retry
+  rescue EOFError
+    puts "Ctrl-D"
   end
 end
 exit(status.to_i)
