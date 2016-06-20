@@ -7,8 +7,10 @@ status = PTY.spawn(bin, *ARGV) do |stdout, stdin, pid|
     loop { STDOUT.print stdout.getc }
   end
   Thread.new do
-    input = Readline.readline("", true).strip
-    stdin.puts input
+    loop do
+      input = Readline.readline("", true).strip
+      stdin.puts input
+    end
   end
   begin
     Process::waitpid(pid) rescue nil
