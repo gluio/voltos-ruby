@@ -4,6 +4,7 @@ require 'readline'
 STDOUT.sync = true
 bin = "#{Gem.bin_path('voltos', 'voltos')}-cli"
 status = PTY.spawn(bin, *ARGV) do |stdout, stdin, pid|
+  stdin.sync = true
   Thread.new do
     loop { STDOUT.print stdout.getc }
   end
