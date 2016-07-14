@@ -4,14 +4,17 @@ require 'readline'
 STDOUT.sync = true
 bin = "#{Gem.bin_path('voltos', 'voltos')}-cli"
 status = PTY.spawn(bin, *ARGV) do |stdout, stdin, pid|
-  stdin.sync = true
+  stdout.sync = true
   Thread.new do
-    loop { STDOUT.print stdout.getc }
+    loop do
+      STDOUT.print stdout.getc
+    end
   end
   Thread.new do
     loop do
       input = Readline.readline("", true)
       if input.nil?
+        stdout.flush
         stdout.close
         stdin.close
       end
@@ -20,6 +23,9 @@ status = PTY.spawn(bin, *ARGV) do |stdout, stdin, pid|
   end
   begin
     Process::waitpid(pid) rescue nil
+    while out = stdout.getc do
+      STDOUT.print out
+    end
   rescue SystemExit, Interrupt
     Process.kill('INT', pid)
     retry
@@ -27,5 +33,4 @@ status = PTY.spawn(bin, *ARGV) do |stdout, stdin, pid|
     puts "Ctrl-D"
   end
 end
-STDOUT.flush
 exit(status.to_i)
