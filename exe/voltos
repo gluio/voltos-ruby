@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 require 'pty'
 require 'readline'
+STDOUT.sync = true
 bin = "#{Gem.bin_path('voltos', 'voltos')}-cli"
 status = PTY.spawn(bin, *ARGV) do |stdout, stdin, pid|
   Thread.new do
@@ -25,4 +26,5 @@ status = PTY.spawn(bin, *ARGV) do |stdout, stdin, pid|
     puts "Ctrl-D"
   end
 end
+STDOUT.flush
 exit(status.to_i)
