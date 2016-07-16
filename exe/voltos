@@ -3,35 +3,55 @@ require 'pty'
 require 'readline'
 STDOUT.sync = true
 bin = "#{Gem.bin_path('voltos', 'voltos')}-cli"
-status = PTY.spawn(bin, *ARGV) do |stdout, stdin, pid|
-  stdout.sync = true
-  Thread.new do
-    loop do
-      STDOUT.print stdout.getc
-    end
-  end
-  Thread.new do
-    loop do
-      input = Readline.readline("", true)
-      if input.nil?
-        stdout.flush
-        stdout.close
-        stdin.close
+if STDIN.tty?
+  status = PTY.spawn(bin, *ARGV) do |stdout, stdin, pid|
+    stdout.sync = true
+    Thread.new do
+      loop do
+        STDOUT.print stdout.getc
       end
-      stdin.puts input.strip
+    end
+    Thread.new do
+      loop do
+        input = Readline.readline("", true)
+        if input.nil?
+          stdout.flush
+          stdout.close
+          stdin.close
+        end
+        stdin.puts input.strip
+      end
+    end
+    begin
+      Process::waitpid(pid) rescue nil
+      while out = stdout.getc do
+        STDOUT.print out
+      end
+    rescue SystemExit, Interrupt
+      Process.kill('INT', pid)
+      retry
+    rescue EOFError
+      puts "Ctrl-D"
+    rescue IOError
     end
   end
-  begin
-    Process::waitpid(pid) rescue nil
-    while out = stdout.getc do
-      STDOUT.print out
+else
+  Open3.popen3(bin, *ARGV) do |stdin, stdout, stderr, thread|
+    errThread = Thread.new do
+      while !stderr.eof?  do
+        putc stderr.readchar
+      end
     end
-  rescue SystemExit, Interrupt
-    Process.kill('INT', pid)
-    retry
-  rescue EOFError
-    puts "Ctrl-D"
-  rescue IOError
+    outThread = Thread.new do
+      while !stdout.eof?  do
+        putc stdout.readchar
+      end
+    end
+    Process::waitpid(thread.pid) rescue nil
+    errThread.join
+    outThread.join
+    process = thread.value
+    status = process.exitstatus.to_i if !process.nil?
   end
 end
 exit(status.to_i)
