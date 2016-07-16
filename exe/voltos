@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'pty'
+require 'open3'
 require 'readline'
 STDOUT.sync = true
 bin = "#{Gem.bin_path('voltos', 'voltos')}-cli"
