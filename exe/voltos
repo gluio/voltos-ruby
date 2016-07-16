@@ -31,6 +31,7 @@ status = PTY.spawn(bin, *ARGV) do |stdout, stdin, pid|
     retry
   rescue EOFError
     puts "Ctrl-D"
+  rescue IOError
   end
 end
 exit(status.to_i)
