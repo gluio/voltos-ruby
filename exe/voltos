@@ -2,10 +2,10 @@
 require 'pty'
 require 'open3'
 require 'readline'
-STDOUT.sync = true
-bin = "#{Gem.bin_path('voltos', 'voltos')}-cli"
-if STDIN.tty?
-  status = PTY.spawn(bin, *ARGV) do |stdout, stdin, pid|
+
+def run_as_tty(bin, args)
+  STDOUT.sync = true
+  status = PTY.spawn(bin, *args) do |stdout, stdin, pid|
     stdout.sync = true
     Thread.new do
       loop do
@@ -36,23 +36,47 @@ if STDIN.tty?
     rescue IOError
     end
   end
-else
+  status
+end
+
+def run_as_daemon(bin, args)
+  process = nil
   Open3.popen3(bin, *ARGV) do |stdin, stdout, stderr, thread|
+    Thread.new do
+      while !stdin.closed? do
+        input = Readline.readline("", true).strip
+        stdin.puts input
+      end
+    end
+
     errThread = Thread.new do
       while !stderr.eof?  do
         putc stderr.readchar
       end
     end
+
     outThread = Thread.new do
       while !stdout.eof?  do
         putc stdout.readchar
       end
     end
-    Process::waitpid(thread.pid) rescue nil
-    errThread.join
-    outThread.join
-    process = thread.value
-    status = process.exitstatus.to_i if !process.nil?
+
+    begin
+      Process::waitpid(thread.pid) rescue nil
+      errThread.join
+      outThread.join
+      process = thread.value
+    rescue SystemExit, Interrupt
+      retry
+    end
   end
+  return process.exitstatus if process
+end
+
+bin = "#{Gem.bin_path('voltos', 'voltos')}-cli"
+if STDIN.tty?
+  status = run_as_tty(bin, ARGV)
+else
+  status = run_as_daemon(bin, ARGV)
 end
 exit(status.to_i)
