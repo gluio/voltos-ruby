@@ -32,8 +32,7 @@ def run_as_tty(bin, args)
       Process.kill('INT', pid)
       retry
     rescue EOFError
-      puts "Ctrl-D"
-    rescue IOError
+    rescue IOError, Errno::EIO
     end
   end
   status
