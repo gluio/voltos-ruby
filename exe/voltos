@@ -26,6 +26,7 @@ def run_as_tty(bin, args)
     begin
       Process::waitpid(pid) rescue nil
     rescue SystemExit, Interrupt
+      STDOUT.puts "DEBUG: Sending INT to #{pid}"
       Process.kill('INT', pid)
       retry
     rescue EOFError
