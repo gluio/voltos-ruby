@@ -26,7 +26,6 @@ def run_as_tty(bin, args)
     begin
       Process::waitpid(pid) rescue nil
       while out = stdout.getc do
-        STDOUT.print out.inspect
         STDOUT.print out
       end
     rescue SystemExit, Interrupt
