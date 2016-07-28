@@ -30,7 +30,6 @@ def run_as_tty(bin, args)
       end
     rescue SystemExit, Interrupt
       Process.kill('INT', pid)
-      Process::waitpid(pid) rescue nil
       retry
     rescue EOFError
     rescue IOError, Errno::EIO
