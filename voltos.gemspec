@@ -33,6 +33,7 @@ Gem::Specification.new do |spec|
   # spec.add_development_dependency "curb", '~> 0'
   # spec.add_development_dependency "json", '~> 1.8.3'
   spec.add_development_dependency 'json', '~> 1.8', '>= 1.8.3'
+  spec.add_development_dependency 'byebug', '> 0'
 
   # spec.add_development_dependency "bundler"
   # spec.add_development_dependency "rake"
