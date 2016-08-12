@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
+$:.unshift File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'voltos/exe'
+
 bin = "#{Gem.bin_path('voltos', 'voltos')}-cli"
 process = Voltos::Process.new
 status = process.run(bin, *ARGV)
