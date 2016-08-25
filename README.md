@@ -135,46 +135,6 @@ You'll use Voltos to load up a **bundle** of credentials each time. Think of a b
    puts ENV['MY_SECRET_KEY']
     ```
 
-### Multiple bundles
-
-Sometimes, you need to load up more than one bundle (e.g. you have ``DEV`` and ``PROD`` bundles to load when deploying on different environments).
-
-1. Get the respective API keys for those bundles (e.g. ``VOLTOS_COMMON`` and ``VOLTOS_PROD``).
-
-2. Set environment variables for these bundle keys:
-   ```ruby
-   $ export VOLTOS_COMMON=1294854fe52417a
-   $ export VOLTOS_PROD=8646ec352729c3
-   
-   # or on a platform like Heroku
-   $ heroku config:set VOLTOS_COMMON=1294854fe52417a VOLTOS_PROD=8646ec352729c3
-   ```
-
-2. Manually load up each bundle of credentials at appropriate time for your app:
-   ```ruby
-   
-   ## environment.rb - load up COMMON bundle with credentials common to all environments
-   Voltos.configure do |config|
-     config.api_key = ENV["VOLTOS_COMMON"]
-   end
-   
-   voltos_creds = Voltos.load
-   voltos_creds.each do |key,val|
-     ENV[key] ||= val
-   end
-
-
-   ## production.rb - load up PROD bundle with credentials specific to prod environment
-   Voltos.configure do |config|
-     config.api_key = ENV["VOLTOS_PROD"]
-   end
-   
-   voltos_creds = Voltos.load
-   voltos_creds.each do |key,val|
-     ENV[key] ||= val
-   end
-   ```
-
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/voltos-online/voltos-ruby
