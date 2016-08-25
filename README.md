@@ -92,33 +92,14 @@ $ voltos destroy piedpiper-backend
 ```
 
 
+## Using Voltos with your apps
 
-## Getting started
+When you're done loading up your bundles with credentials, you'll want to start using them with your apps.
 
-You'll use Voltos to load up a **bundle** of credentials each time. Think of a bundle as credentials that have been logically grouped together, e.g. a ``PROD`` bundle.
+### Running locally
 
-1. Ensure your bundle(s) are organised how you want, on your Voltos account (https://voltos.online).
+### Deploying to Heroku
 
-2. Find the API key for the bundle that you want your app to load (e.g. bundle ``PROD``'s API key: 13579def13579def)
-
-2. Set this key as an environment variable in your app, e.g.
-   ```ruby
-   $ export VOLTOS_KEY=13579def13579def
-
-   # or on a platform like Heroku
-   $ heroku config:set VOLTOS_KEY=13579def13579def
-   ```
-   In a moment, we'll use this key to load up the matching Voltos bundle of credentials (and don't worry, you'll only need to set one environment variable this way).
-
-3. Require the `voltos` gem early on, before you use the credentials:
-   ```ruby
-   require 'voltos'
-   
-   # Voltos will automatically load the bundle matching the key you've specified in VOLTOS_KEY
-   # and load those credentials into ENV, ready to use
-   
-   puts ENV['MY_SECRET_KEY']
-    ```
 
 ## Contributing
 
