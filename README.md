@@ -32,7 +32,6 @@ sudo apt-get install libcurl4-openssl-dev
 ## Getting started
 
 ### Sign up
-
 ```
 $ voltos signup
 
@@ -45,7 +44,6 @@ New account created. Please check your email inbox and click the link to confirm
 ```
 
 ### Sign in
-
 ```
 $ voltos auth
 (Press CTRL^C to sign up for a new account)
@@ -58,7 +56,6 @@ $
 ```
 
 ### Create bundle of credentials
-
 ```
 $ voltos create piedpiper-backend
 Creating bundle... ⣻ 
@@ -68,19 +65,17 @@ Created a new bundle: piedpiper-backend
 ```
 
 ### Add credentials to bundle
-
 ```
 ## add to default bundle in use
 $ voltos set MAILSERVICE=17263ed6547a7c7d8372
-$ voltos set DEV_URL=https:///dev.piedpiper.io
+$ voltos set DEV_URL=https://dev.piedpiper.io
 
-## or:
+## or explicitly specify which bundle:
 $ voltos set MAILSERVICE=17263ed6547a7c7d8372 piedpiper-backend
-$ voltos set DEV_URL=https:///dev.piedpiper.io piedpiper-backend
+$ voltos set DEV_URL=https://dev.piedpiper.io piedpiper-backend
 ```
 
 ### List credentials in a bundle
-
 ```
 $ voltos list
 Fetching credentials... ⣽ 
@@ -91,7 +86,6 @@ MAILSERVICE     : 17263ed6547a7c7d8372
 ```
 
 ### List all your credentials
-
 ```
 $ voltos list --all
 Listing bundles... ⣽ 
@@ -103,10 +97,27 @@ cloudDrive
 ▸ Bundle in use: piedpiper-backend
 ```
 
-
 ### Share credentials
+```
+$ voltos share sasha@hooli.com
+Sharing bundle... ⣟ 
 
+Shared 'piedpiper-backend' with sasha@hooli.com
+▸ Bundle in use: piedpiper-backend
+```
 
+### Remove credentials
+```
+$ voltos unset piedpiper-backend DEV_URL
+
+⚠️  You're about to remove the following credentials from the bundle 'piedpiper-backend': 
+DEV_URL
+Continue (yes/no) ? y
+Removing credentials... ⣽ 
+
+Removed the following credentials from 'piedpiper-backend' bundle:
+DEV_URL
+```
 
 ## Getting started
 
