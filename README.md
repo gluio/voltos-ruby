@@ -9,16 +9,41 @@ Voltos stores your credentials (e.g. API keys, usernames, passwords, tokens) in 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'voltos'
+gem 'voltos', '~> 0.3.0rc14'
 ```
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
     $ gem install voltos
+    
+### Troubleshooting installation
+
+**Ubuntu**
+
+You may need to install native extensions first:
+```
+sudo apt-get install libcurl4-openssl-dev
+```
+
+## Getting started
+
+### Sign up
+
+```
+$ voltos signup
+
+=== Sign up for a new account
+Enter your email address: daniel+101@thedanielmay.com
+daniel+101@thedanielmay.com
+Creating account... ⣾ 
+
+New account created. Please check your email inbox and click the link to confirm your email address.
+```
+
 
 ## Getting started
 
