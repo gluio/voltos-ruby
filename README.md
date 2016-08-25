@@ -4,6 +4,10 @@ This gem provides Voltos Ruby bindings to access the Voltos API from apps writte
 
 Voltos stores your credentials (e.g. API keys, usernames, passwords, tokens) in a secure, central location - so that your apps can access them, and you can more easily manage them & access to them. 
 
+## Contents
+* [Installation](#installation)
+* [Getting started](#getting-started)
+
 ## Installation
 
 Add this line to your application's Gemfile:
