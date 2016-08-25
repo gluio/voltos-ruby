@@ -34,33 +34,16 @@ sudo apt-get install libcurl4-openssl-dev
 ### Sign up
 ```
 $ voltos signup
-
-=== Sign up for a new account
-Enter your email address: jane@company.com
-jane@company.com
-Creating account... ⣾ 
-
-New account created. Please check your email inbox and click the link to confirm your email address.
 ```
 
 ### Sign in
 ```
 $ voltos auth
-(Press CTRL^C to sign up for a new account)
-Enter your email address: jane@company.com
-jane@thedanielmay.com
-Password: foobar
-**********
-Authenticating account... ⢿ 
-$
 ```
 
 ### Create bundle of credentials
 ```
 $ voltos create piedpiper-backend
-Creating bundle... ⣻ 
-
-Created a new bundle: piedpiper-backend
 ```
 
 ### Add credentials to bundle
@@ -77,62 +60,31 @@ $ voltos set DEV_URL=https://dev.piedpiper.io piedpiper-backend
 ### List credentials in a bundle
 ```
 $ voltos list
-Fetching credentials... ⣽ 
-=== piedpiper-backend credentials
-DEV_URL         : https://dev.piedpiper.io
-MAILSERVICE     : 17263ed6547a7c7d8372
 ```
 
-### List all your credentials
+### List all bundles of credentials that you can access
 ```
 $ voltos list --all
-Listing bundles... ⣽ 
-=== Your bundles
-geoserver-test
-geoserver-prod
-piedpiper-backend
-cloudDrive
 ```
 
 ### Share bundle of credentials
 ```
 $ voltos share sasha@hooli.com
-Sharing bundle... ⣟ 
-
-Shared 'piedpiper-backend' with sasha@hooli.com
 ```
 
 ### Unshare bundle of credentials
 ```
 $ voltos retract piedpiper-backend sasha@hooli.com
-Retracting access... ⡿ 
-
-Retracted sasha@hooli.com's access to 'piedpiper-backend'
 ```
 
 ### Remove credentials
 ```
 $ voltos unset piedpiper-backend DEV_URL
-
-⚠️  You're about to remove the following credentials from the bundle 'piedpiper-backend': 
-DEV_URL
-Continue (yes/no) ? y
-Removing credentials... ⣽ 
-
-Removed the following credentials from 'piedpiper-backend' bundle:
-DEV_URL
 ```
-
 
 ### Destroy bundle of credentials
 ```
 $ voltos destroy piedpiper-backend
-
-⚠️  You're about to permanently destroy the bundle 'piedpiper-backend': 
-Continue (yes/no) ? y
-Destroying bundle... ⣽ 
-
-'piedpiper-backend' has been deleted
 ```
 
 
