@@ -61,7 +61,6 @@ $ voltos create piedpiper-backend
 Creating bundle... ⣻ 
 
 Created a new bundle: piedpiper-backend
-▸ Bundle in use: piedpiper-backend
 ```
 
 ### Add credentials to bundle
@@ -82,7 +81,6 @@ Fetching credentials... ⣽
 === piedpiper-backend credentials
 DEV_URL         : https://dev.piedpiper.io
 MAILSERVICE     : 17263ed6547a7c7d8372
-▸ Bundle in use: piedpiper-backend
 ```
 
 ### List all your credentials
@@ -94,16 +92,22 @@ geoserver-test
 geoserver-prod
 piedpiper-backend
 cloudDrive
-▸ Bundle in use: piedpiper-backend
 ```
 
-### Share credentials
+### Share bundle of credentials
 ```
 $ voltos share sasha@hooli.com
 Sharing bundle... ⣟ 
 
 Shared 'piedpiper-backend' with sasha@hooli.com
-▸ Bundle in use: piedpiper-backend
+```
+
+### Unshare bundle of credentials
+```
+$ voltos retract piedpiper-backend sasha@hooli.com
+Retracting access... ⡿ 
+
+Retracted sasha@hooli.com's access to 'piedpiper-backend'
 ```
 
 ### Remove credentials
@@ -118,6 +122,20 @@ Removing credentials... ⣽
 Removed the following credentials from 'piedpiper-backend' bundle:
 DEV_URL
 ```
+
+
+### Destroy bundle of credentials
+```
+$ voltos destroy piedpiper-backend
+
+⚠️  You're about to permanently destroy the bundle 'piedpiper-backend': 
+Continue (yes/no) ? y
+Destroying bundle... ⣽ 
+
+'piedpiper-backend' has been deleted
+```
+
+
 
 ## Getting started
 
