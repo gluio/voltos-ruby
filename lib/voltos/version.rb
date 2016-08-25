@@ -1,3 +1,3 @@
 module Voltos
-  VERSION = "0.3.0.rc14"
+  VERSION = "0.3.0"
 end
