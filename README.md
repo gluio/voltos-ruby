@@ -37,12 +37,75 @@ sudo apt-get install libcurl4-openssl-dev
 $ voltos signup
 
 === Sign up for a new account
-Enter your email address: daniel+101@thedanielmay.com
-daniel+101@thedanielmay.com
+Enter your email address: jane@company.com
+jane@company.com
 Creating account... ⣾ 
 
 New account created. Please check your email inbox and click the link to confirm your email address.
 ```
+
+### Sign in
+
+```
+$ voltos auth
+(Press CTRL^C to sign up for a new account)
+Enter your email address: jane@company.com
+jane@thedanielmay.com
+Password: foobar
+**********
+Authenticating account... ⢿ 
+$
+```
+
+### Create bundle of credentials
+
+```
+$ voltos create piedpiper-backend
+Creating bundle... ⣻ 
+
+Created a new bundle: piedpiper-backend
+▸ Bundle in use: piedpiper-backend
+```
+
+### Add credentials to bundle
+
+```
+## add to default bundle in use
+$ voltos set MAILSERVICE=17263ed6547a7c7d8372
+$ voltos set DEV_URL=https:///dev.piedpiper.io
+
+## or:
+$ voltos set MAILSERVICE=17263ed6547a7c7d8372 piedpiper-backend
+$ voltos set DEV_URL=https:///dev.piedpiper.io piedpiper-backend
+```
+
+### List credentials in a bundle
+
+```
+$ voltos list
+Fetching credentials... ⣽ 
+=== piedpiper-backend credentials
+DEV_URL         : https://dev.piedpiper.io
+MAILSERVICE     : 17263ed6547a7c7d8372
+▸ Bundle in use: piedpiper-backend
+```
+
+### List all your credentials
+
+```
+$ voltos list --all
+Listing bundles... ⣽ 
+=== Your bundles
+geoserver-test
+geoserver-prod
+piedpiper-backend
+cloudDrive
+▸ Bundle in use: piedpiper-backend
+```
+
+
+### Share credentials
+
 
 
 ## Getting started
