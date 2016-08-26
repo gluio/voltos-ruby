@@ -57,7 +57,7 @@ module Voltos
     attr_accessor :message
 
     def initialize
-      @api_url = ENV["VOLTOS_API_URL"] || "https://voltos.online/v1"
+      @api_url = ENV["VOLTOS_API_URL"] || "https://voltos.io/v1"
       @api_key = ENV["VOLTOS_KEY"]
     end
   end

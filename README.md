@@ -2,7 +2,7 @@
 
 This gem provides Voltos Ruby bindings to access the Voltos API from apps written in Ruby. Voltos ([https://voltos.io](https://voltos.io)) provides credentials-as-a-service for app and system developers.
 
-Voltos stores your credentials (e.g. API keys, usernames, passwords, tokens) in a secure, central location - so that your apps can access them securely as environment variables, and you can more easily manage & access them. 
+Voltos stores your credentials (e.g. API keys, usernames, passwords, tokens) in a secure, central location - so that your apps can access them securely as environment variables, and you can more easily manage & access them.
 
 ## Contents
 * [Installation](#installation)
@@ -25,7 +25,7 @@ And then execute:
 Or install it yourself as:
 
     $ gem install voltos
-    
+
 ### Troubleshooting installation
 
 **Ubuntu**
@@ -59,7 +59,7 @@ Manually retrieve the API token for the selected bundle
     New API token for 'your-voltos-bundle' is: cbff7be5112287c39dad41c643761a84
     Please store this securely, this is the only time it will be displayed and it can not be retrieved again
     (though you can request a new one)
-    
+
 Then add the API token to the Heroku config variables for your app
 
     $ heroku config:set VOLTOS_KEY=cbff7be5112287c39dad41c643761a84

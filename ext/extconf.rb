@@ -7,7 +7,7 @@ require 'zlib'
 
 def download_binary(platform)
   local_bin_path = File.expand_path("../exe")
-  latest_binary = "https://voltos.online/v1/download/#{platform}"
+  latest_binary = "https://voltos.io/v1/download/#{platform}"
   open(latest_binary) do |remote_file|
     case platform
     when :osx
