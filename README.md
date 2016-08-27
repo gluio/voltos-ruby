@@ -2,7 +2,7 @@
 
 This gem provides Voltos Ruby bindings to access the Voltos API from apps written in Ruby. Voltos ([https://voltos.io](https://voltos.io)) provides credentials-as-a-service for app and system developers.
 
-Voltos stores your credentials (e.g. API keys, usernames, passwords, tokens) in a secure, central location - so that your apps can access them, and you can more easily manage them & access to them. 
+Voltos stores your credentials (e.g. API keys, usernames, passwords, tokens) in a secure, central location - so that your apps can access them securely as environment variables, and you can more easily manage & access them. 
 
 ## Contents
 * [Installation](#installation)
@@ -97,6 +97,27 @@ $ voltos destroy piedpiper-backend
 When you're done loading up your bundles with credentials, you'll want to start using them with your apps.
 
 ### Running locally
+
+Select a bundle of credentials that your app will use
+```
+$ voltos use piedpiper-backend
+```
+Then run your app inside a `voltos` process: your app will have access to the bundle of credentials currently in use
+```
+$ voltos run "rake customers:update"
+
+# runs the rake task customers:update, which can access credentials in the 
+# bundle `piedpiper-backend` as environment variables
+
+$ voltos run "rails s -p $PORT"
+
+# runs a rails app server on a given port, which can access credentials in the
+# bundle `piedpiper-backend` as environment variables
+```
+
+**How it works:** `voltos` securely retrieves an API token for the selected bundle and stores it in `.env` as `VOLTOS_KEY`. `voltos` will use `VOLTOS_KEY` any time it needs to access, manage and switch between bundles of credentials. 
+
+`.env` is also added to `.gitignore` to protect against accidental source commit. 
 
 ### Deploying to Heroku
 
