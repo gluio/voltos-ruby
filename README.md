@@ -13,7 +13,7 @@ Voltos stores your credentials (e.g. API keys, usernames, passwords, tokens) in 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'voltos', '~> 0.3.0rc14'
+gem 'voltos'
 ```
 
 And then execute:
