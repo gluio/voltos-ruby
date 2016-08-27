@@ -115,12 +115,29 @@ $ voltos run "rails s -p $PORT"
 # bundle `piedpiper-backend` as environment variables
 ```
 
-**How it works:** `voltos` securely retrieves an API token for the selected bundle and stores it in `.env` as `VOLTOS_KEY`. `voltos` will use `VOLTOS_KEY` any time it needs to access, manage and switch between bundles of credentials. 
-
-`.env` is also added to `.gitignore` to protect against accidental source commit. 
+**How it works:** `voltos` securely retrieves an API token for the selected bundle and stores it in `.env` as `VOLTOS_KEY`. `voltos` will use `VOLTOS_KEY` any time it needs to access, manage and switch between bundles of credentials. `.env` is also added to `.gitignore` to protect against accidental source commit. 
 
 ### Deploying to Heroku
+Ensure your Heroku app is packaging the `voltos` gem in your Gemfile.
 
+Update your `Procfile` to run your process using `voltos`
+```
+web: voltos run "puma -C config/puma.rb"
+```
+
+Manually retrieve the API token for the selected bundle
+```
+$ voltos token
+```
+Then add the API token to the Heroku config variables for your app
+```
+# assuming your bundle's API token is: 8ce32acd9437efe9ef55c39e44dea337
+$ heroku config:set 8ce32acd9437efe9ef55c39e44dea337
+```
+
+On startup, `voltos` will securely retrieve your bundle's credentials and make them available to your app.
+
+Anytime you need to update your credentials: do so via the CLI or web app, `heroku restart` your app, and the updated credentials are loaded up to your app again.
 
 ## Contributing
 
