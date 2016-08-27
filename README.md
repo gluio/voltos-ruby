@@ -1,6 +1,6 @@
 # Voltos Ruby bindings
 
-This gem provides Voltos Ruby bindings to access the Voltos API from apps written in Ruby. Voltos ([https://voltos.online](https://voltos.online)) provides credentials-as-a-service for app and system developers.
+This gem provides Voltos Ruby bindings to access the Voltos API from apps written in Ruby. Voltos ([https://voltos.io](https://voltos.io)) provides credentials-as-a-service for app and system developers.
 
 Voltos stores your credentials (e.g. API keys, usernames, passwords, tokens) in a secure, central location - so that your apps can access them, and you can more easily manage them & access to them. 
 
@@ -103,5 +103,5 @@ When you're done loading up your bundles with credentials, you'll want to start 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/voltos-online/voltos-ruby
+Bug reports and pull requests are welcome on GitHub at https://github.com/gluio/voltos-ruby
 
