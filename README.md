@@ -8,6 +8,7 @@ Voltos stores your credentials (e.g. API keys, usernames, passwords, tokens) in 
 * [Installation](#installation)
 * [Getting started](#getting-started)
 * [Using Voltos with your apps](#using-voltos-with-your-apps)
+* [Contributing](#contributing)
 
 ## Installation
 
