@@ -57,10 +57,6 @@ $ voltos create piedpiper-backend
 ## add to default bundle in use
 $ voltos set MAILSERVICE=17263ed6547a7c7d8372
 $ voltos set DEV_URL=https://dev.piedpiper.io
-
-## or explicitly specify which bundle:
-$ voltos set MAILSERVICE=17263ed6547a7c7d8372 piedpiper-backend
-$ voltos set DEV_URL=https://dev.piedpiper.io piedpiper-backend
 ```
 
 ### List credentials in a bundle
@@ -87,9 +83,6 @@ $ voltos retract piedpiper-backend sasha@hooli.com
 ```
 ## remove from default bundle in use
 $ voltos unset DEV_URL
-
-## or explicitly specify which bundle:
-$ voltos unset DEV_URL piedpiper-backend
 ```
 
 ### Destroy bundle of credentials
