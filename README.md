@@ -85,7 +85,11 @@ $ voltos retract piedpiper-backend sasha@hooli.com
 
 ### Remove credentials
 ```
-$ voltos unset piedpiper-backend DEV_URL
+## remove from default bundle in use
+$ voltos unset DEV_URL
+
+## or explicitly specify which bundle:
+$ voltos unset DEV_URL piedpiper-backend
 ```
 
 ### Destroy bundle of credentials
