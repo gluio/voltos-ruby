@@ -6,7 +6,7 @@ Voltos stores your credentials (e.g. API keys, usernames, passwords, tokens) in 
 
 ## Contents
 * [Installation](#installation)
-* [Getting started](#getting-started)
+* [Using Voltos](#using-voltos)
 * [Deploying to Heroku](#deploying-to-heroku)
 * [Contributing](#contributing)
 
@@ -35,6 +35,11 @@ You may need to install native extensions first:
 sudo apt-get install libcurl4-openssl-dev
 ```
 
+## Using Voltos
+Using Voltos to manage your credentials and secrets is generally the same across all platforms. Check out the general docs at:
+
+* [Getting started](https://github.com/gluio/voltos-docs/blob/master/README.md#getting-started)
+* [Using Voltos with your apps](https://github.com/gluio/voltos-docs/blob/master/README.md#using-voltos-with-your-apps)
 
 
 ## Deploying to Heroku
