@@ -31,9 +31,8 @@ Or install it yourself as:
 **Ubuntu**
 
 You may need to install native extensions first:
-```
-sudo apt-get install libcurl4-openssl-dev
-```
+
+    $ sudo apt-get install libcurl4-openssl-dev
 
 ## Using Voltos
 Using Voltos to manage your credentials and secrets is generally the same across all platforms. Check out the general docs at:
@@ -46,19 +45,21 @@ Using Voltos to manage your credentials and secrets is generally the same across
 Ensure your Heroku app is packaging the `voltos` gem in your Gemfile.
 
 Update your `Procfile` to run your process using `voltos`
-```
-web: voltos run "puma -C config/puma.rb"
-```
+
+    web: voltos run "puma -C config/puma.rb"
 
 Manually retrieve the API token for the selected bundle
-```
-$ voltos token
-```
+
+    $ voltos token
+    Fetching token... ⣻
+
+    New API token for 'your-voltos-bundle' is: cbff7be5112287c39dad41c643761a84
+    Please store this securely, this is the only time it will be displayed and it can not be retrieved again
+    (though you can request a new one)
+    
 Then add the API token to the Heroku config variables for your app
-```
-# assuming your bundle's API token is: 8ce32acd9437efe9ef55c39e44dea337
-$ heroku config:set 8ce32acd9437efe9ef55c39e44dea337
-```
+
+    $ heroku config:set VOLTOS_KEY=cbff7be5112287c39dad41c643761a84
 
 On startup, `voltos` will securely retrieve your bundle's credentials and make them available to your app.
 
