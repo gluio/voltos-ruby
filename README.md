@@ -50,6 +50,9 @@ Update your `Procfile` to run your process using `voltos`
 
 Manually retrieve the API token for the selected bundle
 
+    $ voltos use your-voltos-bundle
+    Setting current bundle in use to 'your-voltos-bundle'... ⣻
+
     $ voltos token
     Fetching token... ⣻
 
