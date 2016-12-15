@@ -15,7 +15,8 @@ module Voltos
 
   def self.load
     json_str = Curl.get("#{Voltos.configuration.api_url}/credentials") do |http|
-      http.headers["Authorization"] = "Token token=#{Voltos.configuration.api_key}"
+      http.headers['User-Agent']    = "Voltos-ruby/#{VERSION}"
+      http.headers['Authorization'] = "Token token=#{Voltos.configuration.api_key}"
     end
     data = JSON.parse(json_str.body_str)
     if data.has_key?("status")
@@ -23,7 +24,7 @@ module Voltos
       Voltos.configuration.status  = Voltos.configuration.json_creds["status"]
       Voltos.configuration.message = Voltos.configuration.json_creds["message"]
     else
-      data.each do |key, val|
+      data['env'].each do |key, val|
         ENV[key] ||= val
       end
     end
